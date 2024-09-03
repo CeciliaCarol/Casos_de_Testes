@@ -3,20 +3,42 @@ const { test, expect } = require('@playwright/test');
 
 test.setTimeout(60000); // 60 segundos para todos os testes
 
-test('login with phone number and correct password', async ({ page }) => {
+/*test('login with phone number and correct password', async ({ page }) => {
   await page.goto('https://shopee.com.br/buyer/login');
 
   // Preencher o campo de login com número de telefone
   await page.fill('input[name="loginKey"]', '(+55) 81 98564 2119'); // Substitua com um número de telefone válido
 
   // Preencher o campo de senha
-  await page.fill('input[name="password"]', 'Luzinete48@'); // Substitua com uma senha válida
+  await page.fill('input[name="password"]', 'Luzinete19@'); // Substitua com uma senha válida
 
   // Clicar no botão de login
   await page.click('button.vvOL40:has-text("Entre")');
 
   // Verificar se o usuário foi redirecionado para a página inicial ou uma página esperada após o login
-  await expect(page).toHaveURL('https://shopee.com.br/verify/ivs?is_initial=true'); // Substitua pelo URL correto após o login
+  await expect(page).toHaveURL('https://shopee.com.br/?gad_source=1&gclid=CjwKCAjw59q2BhBOEiwAKc0ijdAHBjvvS6wTUkwmBl9nKMoCwcPcPBlK2WSgojFIzhOiahNg9I6HHBoCBxYQAvD_BwE'); // Substitua pelo URL correto após o login
+});*/
+test('login with email and correct password on Shein', async ({ page }) => {
+  // Acessar a página de login da Shein
+  await page.goto('https://m.shein.com/br/user/index');
+
+  // Preencher o campo de número de celular ou e-mail
+  await page.fill('input[type="text"]', 'alvesisabela2142@gmail.com'); // Substitua com o e-mail ou número de telefone válido
+
+  // Clicar no botão de "Continuar"
+  await page.click('button:has-text("CONTINUAR")');
+
+  // Esperar a navegação para a página de inserção de senha
+  await page.waitForURL('https://m.shein.com/br/user/index');
+
+  // Preencher o campo de senha
+  await page.fill('input[type="password"]', 'Luzinete19@'); // Substitua com uma senha válida
+
+  // Clicar no botão de login
+  await page.click('button:has-text("LOGIN")');
+
+  // Verificar se o usuário foi redirecionado para a página inicial ou uma página esperada após o login
+  await expect(page).toHaveURL('https://m.shein.com/br/user/index'); // Substitua pelo URL correto após o login
 });
 
 test('login with username and correct password', async ({ page }) => {
